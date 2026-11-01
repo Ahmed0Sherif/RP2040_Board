@@ -30,55 +30,111 @@
 <p align="center">
 <img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/POWER%20AND%20USB.png" width="35%" height="35%">
 </p>
-<br> - The board is interfaced by a USB-Micro port through a natively supported USB in the main controller. Each of the VBUS and differential pair are protected by TVS diodes.
-<br> - The Power input is fed to a 3.3V LDO, to support the rest of the board.
+<ul>
+  <li>The board is interfaced by a USB-Micro port through a natively supported USB in the main controller. Each of the VBUS and differential pair are protected by TVS diodes.</li>
+  <li>The Power input is fed to a 3.3V LDO, to support the rest of the board.</li>
+</ul>
 
 ## B-Main Controller:
 <p align="center">
 <img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/RP2040.png" width="50%" height="50%">
 </p>
- <br> - The schematic above shows the enttire pinout of the RP2040, with its pins categorized by function.
- <br> - All the controller pins are mapped, either for external interface or to other accessories on board.
- <br> - The following sections highlight some the PB2040 schematic parts:
+<ul>
+ <li>The schematic above shows the enttire pinout of the RP2040, with its pins categorized by function.</li>
+ <li>All the controller pins are mapped, either for external interface or to other accessories on board.</li>
+ <li> The following sections highlight some the PB2040 schematic parts:</li>
+</ul>
+
 
 ### a-Decoupling Capacitors:
 <p align="center">
 <img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/DECOUPLING%20CAPS.png" width="50%" height="50%">
 </p>
 
-<br> - Each power pin is accompanied by a 100nF ceramic capacitor, with a 1uF ceramic capacitor near pins 44 and 45.
+<br>
+<ul>
+ <li>Each power pin is accompanied by a 100nF ceramic capacitor, with a 1uF ceramic capacitor near pins 44 and 45.</li>
+</ul>
 
 ### b-Crytal:
 <p align="center">
 <img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/CRYSTAL.png" width="50%" height="50%">
 </p>
-
-<br> - The controller works on a 12MHz external crystal X322512MSB4SI.
-<br> - The XOUT pin is connected to a 1kohm resistor to limit the drive power to the crystal if needed.
-<br> - The crystal is tuned by two 20pF capacitors as calculated in the schematic.
+<ul>
+ <li>The controller works on a 12MHz external crystal X322512MSB4SI.</li>
+ <li>The XOUT pin is connected to a 1kohm resistor to limit the drive power to the crystal if needed.</li>
+ <li>The crystal is tuned by two 20pF capacitors as calculated in the schematic.</li>
+</ul>
 
 ### c-USB pins:
 <p align="center">
 <img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/USB.png" width="50%" height="50%">
 </p>
-
-<br> - RP2040 natively supports USB1.1 as either a host or a device.
-<br> - According to its hardware guide, two 27R4 resistors are placed in series in D+ and D- signals as shown in schematic.
-<br> - 27R resistors are used instead as they are more common and cheaper.
+<ul>
+ <li>RP2040 natively supports USB1.1 as either a host or a device.</li>
+ <li>According to its hardware guide, two 27R4 resistors are placed in series in D+ and D- signals as shown in schematic.</li>
+ <li>27R resistors are used instead as they are more common and cheaper.</li>
+</ul>
 
 ## B-Memory:
 <p align="center">
 <img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/NOR%20FLASH.png" width="50%" height="50%">
 </p>
- <br> - In order to store programming code, the RP2040 requires an external QUAD SPI flash memory.
- <br> - The used part is the W25Q128JVSIQ: a 16MByte Quad SPI NOR Flash memory, which is the maximum memory capacity supported by the PB2040.
- <br> - The chip select pin is pulled HIGH through a 10k resistor. Although the RP2040 pulls its SS pin HIGH for a short while after being power up, the pull up resistor is to guarantee the operation of the memory.
+<ul>
+ <li>In order to store programming code, the RP2040 requires an external QUAD SPI flash memory.</li>
+ <li>The used part is the W25Q128JVSIQ: a 16MByte Quad SPI NOR Flash memory, which is the maximum memory capacity supported by the PB2040.</li>
+ <li>The chip select pin is pulled HIGH through a 10k resistor. Although the RP2040 pulls its SS pin HIGH for a short while after being power up, the pull up resistor is to guarantee the operation of the memory.</li>
+</ul>
 
  ## C-Accessories:
  ### a-RESET and BOOT:
  <p align="center">
 <img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/BUTTONS.png" width="50%" height="50%">
 </p>
- <br> -  One button is connected to the RUN pin, pulling it down for RESET, while a pull resistor is connected to it to prevent unwanted resets.
- <br> - The other button is connected to the SS pin of the controller in the same mannerز
 
+<ul>
+  <li>One button is connected to the RUN pin, pulling it down for RESET, while a pull resistor is connected to it to prevent unwanted resets.</li>
+  <li>The other button is connected to the SS pin of the controller in the same manner, where pulling the SS pin down brings the controller to BOOTSEL mode; converting the controller to a USB mass storage device, and the code is copied to the main controller itself.</li>
+  <ul>
+   <li>If the controller is reset while SS to GND, RP2040 will restart in BOOTSEL mode instead of attempting to run the contents of the flash.</li>
+  </ul>
+</ul>
+
+### b-RGB LED:
+ <p align="center">
+<img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/RGB.png" width="50%" height="50%">
+</p>
+<ul>
+ <li>Three IO pins are used to switch the three LEDs of an RGB. Mainly used for debugging.</li>
+ <li>Each LED is driven by an N-Channel MOSFET, to reduce the drawn current from the RP2040.</li>
+</ul>
+
+### c-Connectors
+ <p align="center">
+<img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/HEADERS.png" width="50%" height="50%">
+</p>
+<ul>
+ <li>The rest of the controller pins are mapped to two female headers, along with power pins.</li>
+ <li>A future plan is either to improve this design, or build more supporting boards using the same headers.</li>
+</ul>
+
+# PCB:
+ <p align="center">
+<img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/Stackup.png" width="100%" height="50%">
+</p>
+
+ <p align="center">
+<img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/PCB_TOP_2D.png" width="50%" height="50%">
+</p>
+
+ <p align="center">
+<img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/PCB_BOT_2D.png" width="50%" height="50%">
+</p>
+
+ <p align="center">
+<img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/PCB_TOP.png" width="50%" height="50%">
+</p>
+
+ <p align="center">
+<img src="https://github.com/Ahmed0Sherif/RP2040_Board/blob/main/Images/PCB_BOT.png" width="50%" height="50%">
+</p>
